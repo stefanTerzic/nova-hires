@@ -402,6 +402,7 @@ header.past-hero .scroll-progress-bar-outer {
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 .hero-section .spinner img {
   filter: blur(6px);
@@ -458,6 +459,7 @@ header.past-hero .scroll-progress-bar-outer {
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 .hero-section .hero-image img {
   filter: blur(2px);
