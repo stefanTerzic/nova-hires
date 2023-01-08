@@ -2,7 +2,157 @@ $colorMain: #70C8B9;
 $colorMainDark: #0A3633;
 $colorMainLight: #E5FFF9;
 $colorLight: #C0C0C0;
-$colorDark: #333333;
+$colorDark: #444;
+
+/*--------*/
+/* Mixins */
+/*--------*/
+@mixin displayFlex {
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+  }
+  
+  @mixin displayInlineFlex {
+    display: -webkit-inline-box;
+    display: -moz-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  }
+  
+  @mixin flexColumn {
+    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -webkit-flex-direction: column;
+  }
+  
+  @mixin flexRow {
+    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    -moz-box-orient: horizontal;
+    -moz-box-direction: normal;
+    -webkit-flex-direction: row;
+  }
+  
+  @mixin flexFlex($grow, $shrink, $width) {
+    flex: $grow $shrink $width;
+    -ms-flex: $grow $shrink $width;
+    -webkit-flex: $grow $shrink calc(#{$width} / 1);
+  }
+  
+  @mixin flexOrder($order) {
+    order: $order;
+    -ms-flex-order: $order;
+    -webkit-order: $order;
+  }
+  
+  @mixin flexGrow($grow) {
+    -webkit-box-flex: $grow;
+    -ms-flex-positive: $grow;
+    flex-grow: $grow;
+  }
+  
+  @mixin flexShrink($shrink) {
+    -ms-flex-negative: $shrink;
+    flex-shrink: $shrink;
+  }
+  
+  @mixin flexAlignStart {
+    align-items: flex-start;
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+    -webkit-align-items: flex-start;
+  }
+  
+  @mixin flexAlignCenter {
+    align-items: center;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+  }
+  
+  @mixin flexAlignEnd {
+    align-items: flex-end;
+    -webkit-box-align: end;
+    -moz-box-align: end;
+    -ms-flex-align: end;
+    -webkit-align-items: flex-end;
+  }
+  
+  @mixin flexJustifyStart {
+    justify-content: flex-start;
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
+  }
+  
+  @mixin flexJustifyCenter {
+    justify-content: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+  }
+  
+  @mixin flexJustifyEnd {
+    justify-content: flex-end;
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
+  }
+  
+  @mixin flexJustifyBetween {
+    justify-content: space-between;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+  }
+  
+  @mixin flexJustifyAround {
+    justify-content: space-around;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-around;
+  }
+  
+  @mixin flexNowrap {
+    flex-wrap: nowrap;
+    -webkit-box-lines: single;
+    -moz-box-lines: single;
+    -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+  }
+  
+  @mixin flexWrap {
+    flex-wrap: wrap;
+    -webkit-box-lines: multiple;
+    -moz-box-lines: multiple;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+  }
+  
+  @mixin wordBreak {
+    word-break: break-word;
+  
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      word-break: break-all;
+    }
+  }
 
 /*-----------------------------*/
 /*     Bootstrap overrides     */
@@ -14,16 +164,21 @@ $colorDark: #333333;
 html {
     overflow-x: hidden; 
     font-size: 20px;
+
+    &.modal-active {
+        overflow: hidden;
+        position: relative;
+    }
 }
 
 body {
     font-family: 'Lato', Arial, Helvetica, sans-serif;
-    color: $colorDark;
     background: $colorMainLight;
 }
 
 section {
     padding-left: 45px;
+    padding-right: 45px;
     margin-bottom: 120px;
 }
 
@@ -31,14 +186,40 @@ ul {
     padding: 0;
     margin-bottom: 0;
     list-style-type: none;
+
+    li {
+        margin-bottom: 10px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+a {
+    i {
+        color: $colorDark;
+    }
+
+    &:hover {
+        i {
+            color: $colorMain;
+        }
+    }
 }
 
 /*-----------------*/
 /*   Typography    */
 /*-----------------*/
 h1, h2, h3, h4, h5, h6, p {
+    color: $colorDark;
+
     &.light {
         color: #FFF !important; 
+    }
+
+    &.pale {
+        color: #888;
     }
 }
 
@@ -113,6 +294,14 @@ p {
         font-weight: 300;
         color: #000;
     }
+
+    a {
+        color: $colorMain;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 /*------------------------*/
@@ -170,6 +359,10 @@ p {
             min-height: 300px;
         }
     }
+
+    &.reverse {
+        flex-direction: row-reverse;
+    }
 }
 
 .block-cards {
@@ -215,7 +408,7 @@ p {
         clip: rect(0, auto, auto, 0);
 
         div {
-            // position: fixed;
+            position: fixed;
             // top: 50%;
             // left: 50%;
             top: 0;
@@ -258,6 +451,85 @@ p {
         padding-top: 60px;
         padding-bottom: 60px;
         text-align: center;
+    }
+}
+
+.form-modal-container {
+    @include displayFlex;
+    @include flexAlignCenter;
+    @include flexJustifyCenter;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9997;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    .background-overlay {
+        width: 100%;
+        height: 100%;
+        background-color: $colorMainDark;
+        opacity: 0;
+        position: fixed;
+        z-index: 9998;
+        transition: all 300ms ease-in-out;
+    }
+
+    .form-modal {
+        position: relative;
+        background-color: #fff;
+        padding: 30px 20px;
+        width: 320px;
+        z-index: 9999;
+        transform: translateY(100vh);
+        transition: all 600ms ease-in-out;
+
+        .close-button {
+            position: absolute;
+            top: 0;
+            right: -50px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+
+            &:before,
+            &:after {
+                content: '';
+                display: block;
+                width: 20px;
+                height: 4px;
+                position: absolute;
+                top: 17px;
+                left: 10px;
+                background: #fff;
+                transform-origin: center center;
+            }
+
+            &:before {
+                transform: rotate(-45deg);
+            }
+
+            &:after {
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+    &.active {
+        pointer-events: initial;
+
+        .background-overlay {
+            opacity: 0.8;
+        }
+
+        .form-modal {
+            transform: translateY(0);
+        }
     }
 }
 
@@ -362,6 +634,12 @@ header {
             pointer-events: initial;
         }
     }
+}
+
+footer {
+    padding: 120px 0;
+    background-color: $colorLight;
+
 }
 
 .loading-screen {
@@ -549,7 +827,6 @@ header {
     position: relative;
     padding: 120px 0;
     background: #FFF;
-    min-height: 10000px;
 }
 
 .fadein-item {
@@ -573,6 +850,13 @@ header {
         -o-transform: translateY(0);
         opacity: 1;
     }
+}
+
+.parallax-item {
+    -webkit-transition: transform 10ms linear;
+    -moz-transition: transform 10ms linear;
+    -o-transition: transform 10ms linear;
+    transition: transform 10ms linear;
 }
 
 .placeholder-image {

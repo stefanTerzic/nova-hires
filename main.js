@@ -26,6 +26,16 @@ $(window).on('load', function() {
     // Fade out the loading screen
     $('.loading-screen').addClass('loading-done');
 
+    $('.open-form-modal').click(function() {
+        $('.form-modal-container').addClass('active');
+        $('html').addClass('modal-active');
+    });
+
+    $('.background-overlay, .close-button').click(function() {
+        $('.form-modal-container').removeClass('active');
+        $('html').removeClass('modal-active');
+    });
+
     // Init common functions
     commonFns();
 });
