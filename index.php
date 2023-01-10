@@ -91,7 +91,7 @@
                             </p>
                         </div>
                         <div class="col col-7 col-image fadein-item" data-animation-delay="2">
-                            <div class="placeholder-image"></div>
+                            <div style="background-image: url(./assets/illustration-1.png);"></div>
                         </div>
                     </div>
 
