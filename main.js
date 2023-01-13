@@ -96,7 +96,7 @@ function commonFns() {
         var $this = jQuery(this),
             topOffset = $this.offset().top;
 
-            if (window.customProps.scrollAmount >= (topOffset - window.customProps.windowH)) {
+            if (window.customProps.scrollAmount >= (topOffset - window.customProps.windowH - 180)) {
                 $this.css('transition-delay', ($this.data('animation-delay') * 200) + 'ms');
                 $this.addClass('animated');
             }
