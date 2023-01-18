@@ -36,20 +36,114 @@ $(window).on('load', function() {
         $('html').removeClass('modal-active');
     });
 
+    // Form validation/submit
+
+    // $('#main-contact-form').submit(function(e) {
+    //     e.preventDefault();
+    //     console.log(e);
+
+    //     var form = $('#main-contact-form'),
+    //         formData = {
+    //             firstName: form.find('input[name="firstName"]').val(),
+    //             lastName: form.find('input[name="lastName"]').val(),
+    //             companyName: form.find('input[name="companyName"]').val(),
+    //             email: form.find('input[name="email"]').val(),
+    //             phone: form.find('input[name="phone"]').val(),
+    //         };
+
+    //         console.log(formData);
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: './contactform.php',
+    //         data: formData,
+    //         dataType: 'json',
+    //         contentType: 'application/json; charset=utf-8',
+    //         encode: true,
+    //     }).done(function(data) {
+    //         console.log(data)
+    //     }).fail(function(data) {
+    //         // form.prepend('<h5 class="error">Error: Could not reach the server.</h5>');
+    //         console.log(data);
+    //     });
+    // });
+
+    $('#main-contact-form').validate({
+        // debug: true, 
+
+        rules: {
+           firstName: {
+                required: true,
+                minlength: 2,
+           },
+
+           lastName: {
+                required: true,
+                minlength: 2,
+           },
+
+           companyName: {
+                required: true,
+                minlength: 2,
+           },
+
+           email: {
+                required: true,
+                email: true
+           },
+
+           phone: {
+                required: true,
+                phoneUS: true
+           }
+        },
+
+        submitHandler: function(form) {
+            form.submit(function(e) {
+                e.preventDefault();
+                var formData = {
+                    firstName: form.find('input[name="firstName"]'),
+                    lastName: form.find('input[name="lastName"]'),
+                    companyName: form.find('input[name="companyName"]'),
+                    email: form.find('input[name="email"]'),
+                    phone: form.find('input[name="phone"]'),
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'contactform.php',
+                    data: formData,
+                    dataType: 'json',
+                    encode: true,
+                }).done(function(data) {
+                    console.log(data)
+                }).fail(function(data) {
+                    form.prepend('<h5 class="error">Error: Could not reach the server.</h5>');
+                });
+            });
+            console.log('submit handler');
+            console.log('TEST 01');
+        }
+    });
+
     // Init common functions
     commonFns();
 });
 
 // Scroll events
+var scrollTimeout;
 $(window).on('scroll', function(){
-    const heroContent = $('.hero-section .container');
-    
-    $(window).scrollTop() > heroContent.offset().top - heroContent.height() ?
-        $('.logo').addClass('logo-only') :
-        $('.logo').removeClass('logo-only');
-    
-    // Re-initialize common functions
-    commonFns();
+    // window.clearTimeout(scrollTimeout);
+    // scrollTimeout = window.setTimeout(function(){
+    //     console.log('scrolled! 1');
+        var heroContent = $('.hero-section .container');
+        
+        $(window).scrollTop() > heroContent.offset().top - heroContent.height() ?
+            $('.logo').addClass('logo-only') :
+            $('.logo').removeClass('logo-only');
+        
+        // Re-initialize common functions
+        commonFns();
+    // }, 1);
 });
 
 $(window).on('resize', function() {
@@ -72,7 +166,7 @@ function commonFns() {
     $('.parallax-item').each(function(i){
         var $this = $(this),
             multiplier = parseInt($this.data('parallax-multiplier')),
-            parallaxOffset = parseInt((window.customProps.scrollAmount) * multiplier * -0.01);
+            parallaxOffset = parseInt((window.customProps.scrollAmount) * multiplier * 0.01);
 
             if ($this.parent().hasClass('bg-element')) {
                 console.log(i + '------------------------------------------------');
@@ -133,5 +227,4 @@ function commonFns() {
 }
 
 window.customFns = {
-
 }

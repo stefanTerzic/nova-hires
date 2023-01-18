@@ -115,6 +115,9 @@ form .row .col {
   padding-right: 5px;
   padding-bottom: 10px;
 }
+form .row .col .error {
+  color: red;
+}
 
 label {
   width: 100%;
@@ -657,8 +660,14 @@ p:hover a {
   opacity: 1;
 }
 
-.parallax-item {
-  transition: transform 10ms linear;
+@media (max-width: 991px) {
+  .parallax-item {
+    transform: none !important;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
+  }
 }
 
 /*------------------------*/
@@ -699,6 +708,7 @@ header .logo {
 @media (max-width: 991px) {
   header .logo {
     position: relative;
+    overflow: initial;
   }
 }
 header .logo .logo-mobile {
@@ -966,7 +976,7 @@ footer .socials i {
 }
 .hero-section .spinner {
   width: 90vw;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -975,6 +985,16 @@ footer .socials i {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   pointer-events: none;
+  transition: 100ms ease-in-out;
+  -webkit-transition: 100ms ease-in-out;
+  -moz-transition: 100ms ease-in-out;
+  -ms-transition: 100ms ease-in-out;
+  -o-transition: 100ms ease-in-out;
+}
+@media (max-width: 991px) {
+  .hero-section .spinner {
+    position: fixed;
+  }
 }
 .hero-section .spinner img {
   filter: blur(6px);
@@ -1022,7 +1042,7 @@ footer .socials i {
   }
 }
 .hero-section .hero-image {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   width: 100vw;
@@ -1032,6 +1052,11 @@ footer .socials i {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   pointer-events: none;
+}
+@media (max-width: 991px) {
+  .hero-section .hero-image {
+    position: fixed;
+  }
 }
 .hero-section .hero-image img {
   filter: blur(2px);
