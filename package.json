@@ -1,6 +1,27 @@
 {
   "dependencies": {
     "autoprefixer": "^10.4.13",
-    "bootstrap": "^5.2.3"
-  }
+    "bootstrap": "^5.2.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "nodemailer": "^6.9.0",
+    "nodemon": "^2.0.20"
+  },
+  "name": "nova-hires",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanTerzic/nova-hires.git"
+  },
+  "author": "Stefan Terzic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stefanTerzic/nova-hires/issues"
+  },
+  "homepage": "https://github.com/stefanTerzic/nova-hires#readme",
+  "description": ""
 }
